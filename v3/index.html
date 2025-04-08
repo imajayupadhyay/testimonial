@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Testimonial Slider Slide Effect</title>
+  <style>
+    .testism-container {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testism-quote-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 100px;
+      color: #e0e0e0;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .testism-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transform: translateX(100%);
+      transition: transform 0.6s ease, opacity 0.4s ease;
+      z-index: 0;
+    }
+
+    .testism-slide.active {
+      position: relative;
+      opacity: 1;
+      transform: translateX(0);
+      z-index: 1;
+    }
+
+    .testism-slide.exit-left {
+      transform: translateX(-100%);
+    }
+
+    .testism-slide.enter-right {
+      transform: translateX(100%);
+    }
+
+    .testism-slide.enter-left {
+      transform: translateX(-100%);
+    }
+
+    .testism-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #333;
+      margin-top: 30px;
+    }
+
+    .testism-author {
+      display: flex;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    .testism-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .testism-author-info {
+      font-size: 14px;
+    }
+
+    .testism-author-info strong {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .testism-author-info span {
+      display: block;
+      color: #6c757d;
+      font-style: italic;
+    }
+
+    .testism-controls {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .testism-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      font-size: 18px;
+      color: #000;
+      background: none;
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+      user-select: none;
+    }
+
+    .testism-btn:hover {
+      border-color: #000;
+    }
+  </style>
+</head>
+<body>
+
+<div class="testism-container">
+  <div class="testism-quote-icon">“</div>
+
+  <div class="testism-slide active" id="testism-slide-0">
+    <div class="testism-text">
+      Not only would I hire them again without hesitation, but I will point out that after the first two test projects were done, they earned my repeat business and became the only contractors I worked with the whole time I was upgrading my site.
+    </div>
+    <div class="testism-author">
+      <img src="https://via.placeholder.com/50" alt="Author">
+      <div class="testism-author-info">
+        <strong>KARL MARGRAIN</strong>
+        <span>Founder and Managing Director, PAYLEADR</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testism-slide" id="testism-slide-1">
+    <div class="testism-text">
+      Fantastic service and attention to detail. The team went above and beyond to deliver a high-quality website.
+    </div>
+    <div class="testism-author">
+      <img src="https://via.placeholder.com/50" alt="Author">
+      <div class="testism-author-info">
+        <strong>JANE DOE</strong>
+        <span>CTO, TECHCORP</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testism-slide" id="testism-slide-2">
+    <div class="testism-text">
+      They understood the brief immediately and nailed the design on the first attempt. 10/10!
+    </div>
+    <div class="testism-author">
+      <img src="https://via.placeholder.com/50" alt="Author">
+      <div class="testism-author-info">
+        <strong>MIKE SMITH</strong>
+        <span>Product Lead, DESIGNLAB</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="testism-controls">
+    <span class="testism-btn" onclick="prevTestism()">‹</span>
+    <span class="testism-btn" onclick="nextTestism()">›</span>
+  </div>
+</div>
+
+<script>
+  const slides = document.querySelectorAll('.testism-slide');
+  let current = 0;
+  let isAnimating = false;
+
+  function showSlide(newIndex, direction = 'right') {
+    if (isAnimating || newIndex === current) return;
+    isAnimating = true;
+
+    const currentSlide = slides[current];
+    const nextSlide = slides[newIndex];
+
+    // Reset all classes
+    slides.forEach(slide => slide.classList.remove('active', 'exit-left', 'enter-right', 'enter-left'));
+
+    // Slide out current
+    if (direction === 'right') {
+      currentSlide.classList.add('exit-left');
+    } else {
+      currentSlide.classList.add('enter-right');
+    }
+
+    // Prepare next slide
+    nextSlide.classList.add(direction === 'right' ? 'enter-right' : 'enter-left');
+    nextSlide.offsetHeight; // force reflow
+    nextSlide.classList.add('active');
+
+    // Allow animations to finish before cleanup
+    setTimeout(() => {
+      slides.forEach(slide => slide.classList.remove('exit-left', 'enter-right', 'enter-left'));
+      current = newIndex;
+      isAnimating = false;
+    }, 600);
+  }
+
+  function nextTestism() {
+    const next = (current + 1) % slides.length;
+    showSlide(next, 'right');
+  }
+
+  function prevTestism() {
+    const prev = (current - 1 + slides.length) % slides.length;
+    showSlide(prev, 'left');
+  }
+
+  setInterval(nextTestism, 5000);
+</script>
+
+</body>
+</html>

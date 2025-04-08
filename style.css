@@ -1,0 +1,95 @@
+
+    .testism-container {
+      max-width: 700px;
+      margin: 60px auto;
+      padding: 40px 20px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .testism-quote-icon {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 100px;
+      color: #e0e0e0;
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .testism-slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.6s ease;
+    }
+
+    .testism-slide.active {
+      position: relative;
+      opacity: 1;
+    }
+
+    .testism-text {
+      font-size: 16px;
+      line-height: 1.7;
+      color: #333;
+      margin-top: 30px;
+    }
+
+    .testism-author {
+      display: flex;
+      align-items: center;
+      margin-top: 25px;
+    }
+
+    .testism-author img {
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      margin-right: 15px;
+    }
+
+    .testism-author-info {
+      font-size: 14px;
+    }
+
+    .testism-author-info strong {
+      font-weight: bold;
+      color: #000;
+    }
+
+    .testism-author-info span {
+      display: block;
+      color: #6c757d;
+      font-style: italic;
+    }
+
+    .testism-controls {
+      position: absolute;
+      right: 20px;
+      bottom: 10px;
+      display: flex;
+      gap: 10px;
+    }
+
+    .testism-controls button {
+      background: none;
+      border: 1px solid #ccc;
+      border-radius: 50%;
+      width: 32px;
+      height: 32px;
+      font-size: 18px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: border 0.3s;
+    }
+
+    .testism-controls button:hover {
+      border-color: #000;
+    }

@@ -3,121 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Testimonial Slider Clean</title>
-  <style>
-    * { box-sizing: border-box; margin: 0; padding: 0; }
-
-    body {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-
-    .testism-container {
-      max-width: 700px;
-      margin: 60px auto;
-      padding: 40px 20px;
-      position: relative;
-      overflow: hidden;
-      background: #fff;
-    }
-
-    .testism-quote-icon {
-      position: absolute;
-      top: 0;
-      left: 0;
-      font-size: 100px;
-      color: #e0e0e0;
-      line-height: 1;
-      pointer-events: none;
-      user-select: none;
-      z-index: 1;
-    }
-
-    .testism-slider-wrapper {
-      overflow: hidden;
-      position: relative;
-    }
-
-    .testism-slider-track {
-      display: flex;
-      transition: transform 0.6s ease-in-out;
-      will-change: transform;
-    }
-
-    .testism-slide {
-      flex: 0 0 100%;
-      padding-top: 60px;
-    }
-
-    .testism-text {
-      font-size: 16px;
-      line-height: 1.7;
-      color: #333;
-      margin-top: 10px;
-    }
-
-    .testism-author {
-      display: flex;
-      align-items: center;
-      margin-top: 25px;
-      flex-wrap: wrap;
-    }
-
-    .testism-author img {
-      width: 50px;
-      height: 50px;
-      border-radius: 50%;
-      margin-right: 15px;
-      margin-bottom: 10px;
-    }
-
-    .testism-author-info {
-      font-size: 14px;
-    }
-
-    .testism-author-info strong {
-      font-weight: bold;
-      color: #000;
-    }
-
-    .testism-author-info span {
-      display: block;
-      color: #6c757d;
-      font-style: italic;
-    }
-
-    .testism-controls {
-      position: absolute;
-      right: 20px;
-      bottom: 10px;
-      display: flex;
-      gap: 10px;
-    }
-
-    .testism-btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border: 1px solid #ccc;
-      border-radius: 50%;
-      font-size: 18px;
-      color: #000;
-      background: none;
-      cursor: pointer;
-      transition: border-color 0.3s ease;
-      user-select: none;
-    }
-
-    .testism-btn:hover {
-      border-color: #000;
-    }
-
-    @media (max-width: 768px) {
-      .testism-quote-icon { font-size: 60px; }
-      .testism-text { font-size: 15px; }
-      .testism-container { padding: 30px 15px; }
-    }
-  </style>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
 
@@ -173,29 +59,7 @@
   </div>
 </div>
 
-<script>
-  const track = document.getElementById('testism-track');
-  const slides = document.querySelectorAll('.testism-slide');
-  const totalSlides = slides.length;
-  let current = 0;
-
-  function updateSlidePosition() {
-    const offset = -current * 100;
-    track.style.transform = `translateX(${offset}%)`;
-  }
-
-  function nextTestism() {
-    current = (current + 1) % totalSlides;
-    updateSlidePosition();
-  }
-
-  function prevTestism() {
-    current = (current - 1 + totalSlides) % totalSlides;
-    updateSlidePosition();
-  }
-
-  setInterval(nextTestism, 5000);
-</script>
+<script src="./script.js"></script>
 
 </body>
 </html>
